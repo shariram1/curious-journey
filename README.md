@@ -1,0 +1,2 @@
+# curious-journey
+Python Explorer
