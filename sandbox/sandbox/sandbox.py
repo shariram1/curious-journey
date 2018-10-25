@@ -19,7 +19,7 @@ def initConfig(configFileName):
     return config
 
 
-def initLog(configFileName, logFileName):
+def initLog(configFileName):
     fileConfig(configFileName)
     logger = logging.getLogger()
     return logger
@@ -29,25 +29,21 @@ def main():
     programName     = os.path.splitext(os.path.basename(__file__))[0]
     homedirectory   = os.path.join(os.getenv('HOME', './'))
     configFileName  = os.path.join(homedirectory, programName + ".ini")
-    logFileName     = os.path.join(os.getenv('LOG_DIR', os.path.join(homedirectory,  'log')), programName + ".log")
     
     # Initial Validation
     if not os.path.isfile(configFileName):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), configFileName)
     
-    # Read Config
-    config = initConfig(configFileName)
-    
-    print ("programName = {}".format(programName))
-    print ("configFileName = {}".format(configFileName))
-    print ("logFileName = {}".format(logFileName))
-
     # Initialize Logger
-    log = initLog(configFileName, logFileName)
+    log = initLog(configFileName)
     log.info("---------------")
     log.info("SANDBOX Utility")
     log.info("---------------")
-    
+
+    # Read Config
+    config = initConfig(configFileName)
+    log.info("Reading config file: {}".format(configFileName))
+
 
 if __name__ == '__main__':
     main()
