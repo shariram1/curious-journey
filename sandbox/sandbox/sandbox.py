@@ -13,6 +13,7 @@ import os
 
 from logging.config import fileConfig
 
+
 def initConfig(configFileName):
     config = configparser.ConfigParser()
     config.read(configFileName)
@@ -24,16 +25,17 @@ def initLog(configFileName):
     logger = logging.getLogger()
     return logger
 
+
 def main():
-    
-    programName     = os.path.splitext(os.path.basename(__file__))[0]
-    homedirectory   = os.path.join(os.getenv('HOME', './'))
-    configFileName  = os.path.join(homedirectory, programName + ".ini")
-    
+
+    programName = os.path.splitext(os.path.basename(__file__))[0]
+    homedirectory = os.path.join(os.getenv("HOME", "./"))
+    configFileName = os.path.join(homedirectory, programName + ".ini")
+
     # Initial Validation
     if not os.path.isfile(configFileName):
         raise FileNotFoundError(errno.ENOENT, os.strerror(errno.ENOENT), configFileName)
-    
+
     # Initialize Logger
     log = initLog(configFileName)
     log.info("---------------")
@@ -45,5 +47,5 @@ def main():
     log.info("Reading config file: {}".format(configFileName))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
