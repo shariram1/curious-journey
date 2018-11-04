@@ -1,0 +1,11 @@
+language: python
+python:
+  - "2.7"
+  - "3.7"
+script:
+  - python3 -m pytest tests
+# Build all branches, *including* gh-pages:
+branches:
+  only:
+  - gh-pages
+  - /.*/
